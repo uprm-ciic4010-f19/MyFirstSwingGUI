@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -12,26 +13,33 @@ public class MyComponent extends JComponent{
 	
 	public void paintComponent(Graphics g) {
 		
-		Graphics2D g2D = (Graphics2D) g;
-		
-		Rectangle r	= new Rectangle(10,10, 100, 50);
-		g2D.draw(r);
-		
-		Rectangle r2	= new Rectangle(100,100, 100, 50);
-		g2D.draw(r2);
-		
-		r2.translate(100, 100);
-		g2D.draw(r2);
-		
-		Ellipse2D.Double oval = new Ellipse2D.Double(300, 100, 50, 50);
-		g2D.draw(oval);
-		
-		Line2D.Double line1 = new Line2D.Double(50,50, 200, 100);
-		g2D.draw(line1);
+		drawCar(g, 10, 10);
+		drawCar(g, 200, 200);
+		drawCar(g, this.getWidth()-80, this.getHeight()-40);
 		
 		counter++;
 		System.out.println("paintComponent called " + counter + " times.");
 		
+	}
+	
+	public static void drawCar(Graphics g, int x, int y) {
+		Graphics2D g2D = (Graphics2D) g;
+		
+		g2D.setColor(Color.BLUE);
+		Rectangle body	= new Rectangle(x+10,y+20, 60, 10);
+		g2D.fill(body);
+		
+		g2D.setColor(Color.BLACK);
+		Ellipse2D.Double rearTire = new Ellipse2D.Double(x+20, y+30, 10, 10);
+		g2D.fill(rearTire);
+		Ellipse2D.Double frontTire = new Ellipse2D.Double(x+50, y+30, 10, 10);
+		g2D.fill(frontTire);
+		Line2D.Double rearWindow = new Line2D.Double(x+20, y+20, x+30, y+10);
+		g2D.draw(rearWindow);
+		Line2D.Double frontWindow = new Line2D.Double(x+60, y+20, x+50, y+10);
+		g2D.draw(frontWindow);
+		Line2D.Double roof = new Line2D.Double(x+30, y+10, x+50, y+10);
+		g2D.draw(roof);
 	}
 	
 }
